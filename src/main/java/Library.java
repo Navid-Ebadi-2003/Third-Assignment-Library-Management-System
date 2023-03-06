@@ -36,23 +36,15 @@ public class Library {
         books.replace(name , num);
     }
 
-    public void doesBookExist(Book name){
-        boolean test = false;
+    public boolean doesBookExist(String name){
         for(Book i : books.keySet()){
-            if(name==i){
+            if(i.getNameB().equals(name)){
                 if(books.get(name)>0){
-                    test = true;
+                    return true;
                 }
             }
         }
-
-        if(test==true){
-            System.out.println("yes");
-        }
-        else {
-            System.out.println("no");
-        }
-
+        return false;
     }
 
     public void increaseBook(Book name ){
@@ -82,7 +74,7 @@ public class Library {
 
     public User searchUser(String name){
         for(User i : users){
-            if(i.getUsername()==name){
+            if(i.getUsername().equals(name)){
                 return i;
             }
         }
@@ -93,16 +85,13 @@ public class Library {
         name.chengePassword(pass);
     }
 
-    public void doesUserExist(User name){
+    public boolean doesUserExist(String name){
         for(User i : users ){
-            if(i==name){
-                System.out.println("yes");
-            }
-            else {
-                System.out.println("no");
+            if(i.getUsername().equals(name)){
+                return true;
             }
         }
-
+        return false;
     }
 
     //librarian related functions

@@ -30,6 +30,9 @@ public class User {
         return username;
     }
 
+    public String getPassword() {
+        return password;
+    }
 
     public void chengePassword(String pass){
         this.password= pass;
