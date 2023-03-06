@@ -17,7 +17,7 @@ public class Main {
 //        for ()
 //        {
 //            Book book = new Book();
-//            room.add(book);
+//            books.add(book);
 //        }
 
 

@@ -23,12 +23,13 @@ public class Library {
 
     }
 
-    public void searchBook(String author){
+    public Book searchBook(String name){
         for(Book i : books.keySet()){
-            if(i.getAuthor()== author){
-                i.getNameB();
+            if(i.getNameB()==name){
+                return i;
             }
         }
+        return null;  //?
     }
 
     public void updateBook(Book name , int num){
@@ -67,46 +68,79 @@ public class Library {
 
     //user related functions
 
-    public void addUser(){
-        //TODO
+    public void addUser(User name){
+        users.add(name);
     }
 
-    public void removeUser(){
-        //TODO
+    public void removeUser(User name){
+        for(int i =0;i<users.size();i++){
+            if(users.get(i)==name){
+                users.remove(i);
+            }
+        }
     }
 
-    public void searchUser(){
-        //TODO
+    public User searchUser(String name){
+        for(User i : users){
+            if(i.getUsername()==name){
+                return i;
+            }
+        }
+        return null; //?
     }
 
-    public void updateUser(){
-        //TODO
+    public void updateUser(User name , String pass){
+        name.chengePassword(pass);
     }
 
-    public void doesUserExist(){
-        //TODO
+    public void doesUserExist(User name){
+        for(User i : users ){
+            if(i==name){
+                System.out.println("yes");
+            }
+            else {
+                System.out.println("no");
+            }
+        }
+
     }
 
     //librarian related functions
 
-    public void addLibrarian(){
-        //TODO
+    public void addLibrarian(Librarian name){
+        librarians.add(name);
     }
 
-    public void removeLibrarian(){
-        //TODO
+    public void removeLibrarian(Librarian name){
+        for(int i =0; i<librarians.size();i++){
+            if(librarians.get(i)==name){
+                librarians.remove(i);
+            }
+        }
     }
 
-    public void searchLibrarian(){
-        //TODO
+    public Librarian searchLibrarian(String name){
+        for(Librarian i :librarians){
+            if(i.getUsername()==name){
+                return i;
+            }
+        }
+        return null; //?
     }
 
-    public void updateLibrarian(){
-        //TODO
+    public void updateLibrarian(Librarian name , String pass){
+        name.chengePassword(pass);
     }
 
-    public void doesLibrarianExist(){
-        //TODO
+    public void doesLibrarianExist(Librarian name){
+        for (Librarian i : librarians){
+            if(i==name){
+                System.out.println("yes");
+            }
+            else {
+                System.out.println("no");
+            }
+        }
     }
 
 
