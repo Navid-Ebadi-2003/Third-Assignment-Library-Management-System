@@ -25,7 +25,7 @@ public class Library {
 
     public Book searchBook(String name){
         for(Book i : books.keySet()){
-            if(i.getNameB()==name){
+            if(i.getNameB().equals(name)){
                 return i;
             }
         }
@@ -39,7 +39,7 @@ public class Library {
     public boolean doesBookExist(String name){
         for(Book i : books.keySet()){
             if(i.getNameB().equals(name)){
-                if(books.get(name)>0){
+                if(books.get(i)>0){
                     return true;
                 }
             }
@@ -110,7 +110,7 @@ public class Library {
 
     public Librarian searchLibrarian(String name){
         for(Librarian i :librarians){
-            if(i.getUsername()==name){
+            if(i.getUsername().equals(name)){
                 return i;
             }
         }
@@ -121,15 +121,13 @@ public class Library {
         name.chengePassword(pass);
     }
 
-    public void doesLibrarianExist(Librarian name){
+    public boolean doesLibrarianExist(String name){
         for (Librarian i : librarians){
-            if(i==name){
-                System.out.println("yes");
-            }
-            else {
-                System.out.println("no");
+            if(i.getUsername().equals(name)){
+                return true;
             }
         }
+        return false;
     }
 
 

@@ -1,4 +1,4 @@
-public class Librarian extends Library {
+public class Librarian {
     /*
     * The librarian should have a username and a password
     * The librarian should be able to search users, librarians and books
@@ -15,6 +15,10 @@ public class Librarian extends Library {
 
     public String getUsername() {
         return username;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void chengePassword(String pass){

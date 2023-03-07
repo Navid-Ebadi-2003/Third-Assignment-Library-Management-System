@@ -9,9 +9,8 @@ public class Main {
      */
 
     static Library library = new Library();
+    static ArrayList<Book> books = new ArrayList<Book>();  // 2 ways
     public static void main(String[] args) {
-
-        ArrayList<Book> books = new ArrayList<Book>();
 
 
 //            Book book ;
@@ -40,21 +39,20 @@ public class Main {
 
         // 2 ways
 
-       User puria = new User("puria", "1234pe");
-       User nima = new User("nima", "5678ne");
+       library.addUser(new User("puria", "1234pe"));
+       library.addUser(new User("nima", "5678ne"));
 
-       library.addUser(puria);
-       library.addUser(nima);
 
-       Librarian navid = new Librarian("navid" , "1357na");
-
-       library.addLibrarian(navid);
+       library.addLibrarian(new Librarian("navid" , "1357na"));
 
         runMenu();
 
+        System.out.println();
         System.out.println("done");
 
     }
+
+    //*************************************************************************************
 
     public static void runMenu(){
         boolean on_off = true;
@@ -68,6 +66,7 @@ public class Main {
             System.out.println("3.sign up");
 
             int command = input.nextInt();
+            input.nextLine();
 
             if(command==1){
 
@@ -85,25 +84,36 @@ public class Main {
                         System.out.println("2.return a book");
 
                         int command1 = input.nextInt();
+                        input.nextLine();
 
                         System.out.println("print name's book: ");
                         String nameBook= input.nextLine();
 
                         if(library.doesBookExist(nameBook)){
 
-                            Book book = library.searchBook(nameBook);
-
                             if (command1 == 1) {
 
-                                user.rentBook(book);
-                                library.decreaseBook(book);
+                                user.rentBook(library.searchBook(nameBook));
+                                library.decreaseBook(library.searchBook(nameBook));
+
+                                System.out.println("your books: ");
+                                for(Book i: user.getBooks()){
+                                    System.out.print(i.getNameB() + " ");
+                                }
+
                                 on_off=false;
 
                             }
                             else if (command1 == 2) {
 
-                                user.returnBook(book);
-                                library.increaseBook(book);
+                                user.returnBook(library.searchBook(nameBook));
+                                library.increaseBook(library.searchBook(nameBook));
+
+                                System.out.println("your books: ");
+                                for(Book i: user.getBooks()){
+                                    System.out.print(i.getNameB() + " ");
+                                }
+
                                 on_off=false;
                             }
 
@@ -129,11 +139,184 @@ public class Main {
 
             }
             else if(command==2){
+                System.out.println("useername: ");
+                String name = input.nextLine();
+                System.out.println("password: ");
+                String pass = input.nextLine();
+
+                if(library.doesLibrarianExist(name)){
+
+                    Librarian librarian = library.searchLibrarian(name);
+
+                    if(pass.equals(librarian.getPassword())){
+
+                        System.out.println("1.add book");
+                        System.out.println("2.remove book");
+                        System.out.println("3.update book");
+                        System.out.println("4.add user");
+                        System.out.println("5.remove user");
+                        System.out.println("6.update user");
+                        System.out.println("7.add librarian");
+                        System.out.println("8.remove librarian");
+                        System.out.println("9.update librarian");
+
+                        int command1 = input.nextInt();
+                        input.nextLine();
+
+                        switch (command1) {
+                            case 1:
+
+                                System.out.println("name of the book: ");
+                                String  nameB =input.nextLine();
+                                System.out.println("author: ");
+                                String author =input.nextLine();
+                                System.out.println("year: ");
+                                int year = input.nextInt();
+                                input.nextLine();
+                                System.out.println("number: ");
+                                int num = input.nextInt();
+                                input.nextLine();
+
+                                books.add(new Book(nameB , author, year));
+                                library.addBook(books.get(books.size()-1), num);
+
+                                on_off=false;
 
 
+                                break;
+                            case 2:
+
+                                System.out.println("print name's book: ");
+                                String nameBook= input.nextLine();
+
+                                if(library.doesBookExist(nameBook)) {
+
+                                    library.removeBook(library.searchBook(nameBook));
+                                    on_off=false;
+                                }
+                                else{
+                                    System.err.println("this book don't exist ");
+                                }
+
+                                break;
+                            case 3:
+
+                                System.out.println("print name's book: ");
+                                String nameBook1= input.nextLine();
+                                System.out.println("new number of book: ");
+                                int newN = input.nextInt();
+                                input.nextLine();
+
+                                if(library.doesBookExist(nameBook1)) {
+
+                                    library.updateBook(library.searchBook(nameBook1) , newN);
+                                    on_off=false;
+                                }
+                                else{
+                                    System.err.println("this book don't exist ");
+                                }
+
+                                break;
+                            case 4:
+
+                                System.out.println("username: ");
+                                String username =input.nextLine();
+                                System.out.println("password: ");
+                                String password =input.nextLine();
+
+                                library.addUser(new User(username , password));
+                                on_off=false;
+
+                                break;
+
+                            case 5:
+
+                                System.out.println("username: ");
+                                String user =input.nextLine();
+
+                                if(library.doesUserExist(user)){
+
+                                    library.removeUser(library.searchUser(user));
+                                    on_off=false;
+
+                                }
+                                else{
+                                    System.err.println("this user don't exist");
+                                }
+
+                                break;
+                            case 6:
+
+                                System.out.println("username: ");
+                                String user1 =input.nextLine();
+                                System.out.println("new password: ");
+                                String newPass =input.nextLine();
 
 
+                                if(library.doesUserExist(user1)){
 
+                                    library.updateUser(library.searchUser(user1), newPass);
+                                    on_off=false;
+
+                                }
+                                else{
+                                    System.err.println("this user don't exist");
+                                }
+
+
+                                break;
+                            case 7:
+
+                                System.out.println("username: ");
+                                String usernameL =input.nextLine();
+                                System.out.println("password: ");
+                                String passwordL =input.nextLine();
+
+                                library.addLibrarian(new Librarian(usernameL , passwordL));
+                                on_off =false;
+
+                                break;
+                            case 8:
+
+                                System.out.println("username: ");
+                                String librarian1 = input.nextLine();
+
+                                if(library.doesLibrarianExist(librarian1)){
+                                    library.removeLibrarian(library.searchLibrarian(librarian1));
+                                    on_off=false;
+                                }
+                                else {
+                                    System.err.println("this librarian don't exist");
+                                }
+
+                                break;
+                            case 9:
+
+                                System.out.println("username: ");
+                                String librarian2 = input.nextLine();
+                                System.out.println("new password: ");
+                                String newPassL = input.nextLine();
+
+
+                                if(library.doesLibrarianExist(librarian2)){
+                                    library.updateLibrarian(library.searchLibrarian(librarian2) , newPassL);
+                                    on_off=false;
+                                }
+                                else {
+                                    System.err.println("this librarian don't exist");
+                                }
+
+                                break;
+                        }
+
+                    }
+                    else{
+                        System.err.println("wrong password");
+                    }
+                }
+                else{
+                    System.err.println("this librarian don't exist");
+                }
 
 
 
@@ -141,25 +324,17 @@ public class Main {
             }
             else if (command==3){
 
+                System.out.println("username: ");
+                String user = input.nextLine();
+                System.out.println("password: ");
+                String pass = input.nextLine();
 
-
-
-
-
-
-
-
-
-
+                library.addUser(new User(user , pass));
 
             }
             else {
                 System.err.println("wrong answer");
             }
-
-
-
-        on_off = false;
 
 
         }

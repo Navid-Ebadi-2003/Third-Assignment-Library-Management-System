@@ -1,16 +1,13 @@
 import java.util.ArrayList;
 
-public class User {
+public class User extends Librarian{
     //User should have a list of books
     //User should have a username and a password
 
     private ArrayList<Book> books = new ArrayList<Book>();
-    private String username;
-    private String password;
 
-    public User(String username , String password){
-        this.username=username;
-        this.password=password;
+    public User(String username ,String password){
+        super(username , password);
     }
 
 
@@ -26,15 +23,8 @@ public class User {
         }
     }
 
-    public String getUsername() {
-        return username;
+    public ArrayList<Book> getBooks() {
+        return books;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void chengePassword(String pass){
-        this.password= pass;
-    }
 }
