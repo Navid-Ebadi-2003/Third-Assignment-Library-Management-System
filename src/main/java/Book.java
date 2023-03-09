@@ -10,10 +10,6 @@ public class Book {
         this.year=year;
     }
 
-//    public String getAuthor() {
-//        return author;
-//    }
-//
     public String getNameB() {
         return nameB;
     }
